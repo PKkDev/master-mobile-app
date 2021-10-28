@@ -1,0 +1,154 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MasterMobile.Pages.PaymentPagesView.LastPaymentPage.LastPaymentPage"
+             xmlns:model="clr-namespace:MasterMobile.Domain.Model.Payments;assembly=MasterMobile.Domain"
+             xmlns:pageState="clr-namespace:MasterMobile.Templates.PageState"
+             xmlns:preLoad="clr-namespace:MasterMobile.Templates.PreloadingBlocks"
+             Title="{Binding Title}"
+             Shell.NavBarIsVisible="True"
+             x:Name="LastPayPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                     Order="Primary"
+                     Command="{Binding AddPaymentCommand}"/>
+        <ToolbarItem Text="Analyze"
+                     Order="Secondary"
+                     Command="{Binding ViewAnalyzeCommand}"/>
+        <ToolbarItem Text="By Month"
+                     Order="Secondary"
+                     Command="{Binding ViewAnalyzeCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+
+        <pageState:StateContainer State="{Binding PageState}">
+
+            <pageState:StateCondition State="Loading">
+
+                <StackLayout Orientation="Vertical" Padding="5">
+                    <StackLayout>
+                    <StackLayout>
+                        <preLoad:PreloadingBoxView HorizontalOptions="Center" HeightRequest="20" WidthRequest="70" Margin="0,5" BackgroundColor="#95a5a6"/>
+                    </StackLayout>
+                    <preLoad:PreloadingBoxView HeightRequest="50" Margin="0,5" BackgroundColor="#95a5a6"/>
+                    <preLoad:PreloadingBoxView HeightRequest="50" Margin="0,5" BackgroundColor="#95a5a6"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout>
+                            <preLoad:PreloadingBoxView HorizontalOptions="Center" HeightRequest="20" WidthRequest="70" Margin="0,5" BackgroundColor="#95a5a6"/>
+                        </StackLayout>
+                        <preLoad:PreloadingBoxView HeightRequest="50" Margin="0,5" BackgroundColor="#95a5a6"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout>
+                            <preLoad:PreloadingBoxView HorizontalOptions="Center" HeightRequest="20" WidthRequest="70" Margin="0,5" BackgroundColor="#95a5a6"/>
+                        </StackLayout>
+                        <preLoad:PreloadingBoxView HeightRequest="50" Margin="0,5" BackgroundColor="#95a5a6"/>
+                        <preLoad:PreloadingBoxView HeightRequest="50" Margin="0,5" BackgroundColor="#95a5a6"/>
+                        <preLoad:PreloadingBoxView HeightRequest="50" Margin="0,5" BackgroundColor="#95a5a6"/>
+                    </StackLayout>
+                </StackLayout>
+
+            </pageState:StateCondition>
+
+            <pageState:StateCondition State="Normal">
+
+                <RefreshView Command="{Binding RefreshItemsCommand}" 
+                     RefreshColor="#27ae60"
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+
+                    <CollectionView ItemsSource="{Binding Payments}"
+                        IsGrouped="true"
+                        EmptyView="no elements"
+                        ItemsLayout="VerticalList"
+                        SelectionMode="None"
+                            RemainingItemsThreshold="2"
+                            RemainingItemsThresholdReachedCommand="{Binding LoadMoreItemsCommand}">
+
+                        <CollectionView.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10,0">
+                                    <Label Text="{Binding Name}"
+                               Padding="10,10,0,0"
+                                   HorizontalTextAlignment="Center"
+                               TextColor="#000"
+                               FontSize="20"/>
+                                    <!--<BoxView Color="Gray"
+                             HeightRequest="2"
+                             HorizontalOptions="Fill" />-->
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.GroupHeaderTemplate>
+
+                        <CollectionView.GroupFooterTemplate>
+                            <DataTemplate>
+                                <BoxView Color="Red"
+                             HeightRequest="0"
+                             HorizontalOptions="Fill" />
+                            </DataTemplate>
+                        </CollectionView.GroupFooterTemplate>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <SwipeView>
+
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems Mode="Reveal">
+                                            <SwipeItem Text="Delete"
+                                                   BackgroundColor="#e74c3c"
+                                                   Command="{Binding Path=BindingContext.DeletePaymentCommand, Source={x:Reference Name=LastPayPage}}" CommandParameter="{Binding .}"/>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItem Text="Detail"
+                                                   BackgroundColor="#3498db"
+                                                   Command="{Binding Path=BindingContext.ViewDetailCommand, Source={x:Reference Name=LastPayPage}}" CommandParameter="{Binding .}"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+
+                                    <Frame CornerRadius="5" Margin="5" Padding="5"  IsClippedToBounds="True">
+
+                                        <StackLayout x:DataType="model:LastPayment" 
+                                         Orientation="Vertical" VerticalOptions="End"
+                                         Spacing="0" Margin="5" Padding="25,0,0,0">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Frame CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
+                                                    <Image WidthRequest="60" HeightRequest="50"
+                                               Aspect="AspectFit" 
+                                               Source="{Binding ImageSource}"/>
+                                                </Frame>
+
+                                                <StackLayout Orientation="Vertical" VerticalOptions="Center">
+
+                                                    <Label Text="{Binding Cost, StringFormat='{0} р'}" 
+                                               LineBreakMode="NoWrap" 
+                                               FontAttributes="Bold" TextColor="#000" 
+                                               FontSize="18" />
+                                                    <Label Text="{Binding Time, StringFormat='{0:HH:mm}'}" 
+                                               LineBreakMode="NoWrap" 
+                                               FontSize="14" />
+                                                </StackLayout>
+
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                    </Frame>
+
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+                </RefreshView>
+
+            </pageState:StateCondition>
+
+        </pageState:StateContainer>
+
+    </ContentPage.Content>
+
+</ContentPage>

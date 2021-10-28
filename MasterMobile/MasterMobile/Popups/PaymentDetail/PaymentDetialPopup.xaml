@@ -1,0 +1,154 @@
+﻿<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    x:Class="MasterMobile.Popups.PaymentDetail.PaymentDetialPopup"
+    xmlns:pageState="clr-namespace:MasterMobile.Templates.PageState"
+    xmlns:preLoad="clr-namespace:MasterMobile.Templates.PreloadingBlocks"
+    HasSystemPadding="True"
+    SystemPaddingSides="All"
+    IsAnimationEnabled="True"
+    HasKeyboardOffset="False"
+    BackgroundInputTransparent="False">
+
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            DurationIn="400"
+            DurationOut="300"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+
+    <pages:PopupPage.Content>
+        <Frame Padding="15,5" Margin="25,250,25,0" BackgroundColor="#fff" CornerRadius="6">
+
+            <pageState:StateContainer State="{Binding PageState}">
+
+                <pageState:StateCondition State="Loading">
+
+                    <StackLayout>
+
+                        <FlexLayout JustifyContent="SpaceBetween">
+
+                            <preLoad:PreloadingBoxView HeightRequest="50" WidthRequest="50"/>
+
+                            <StackLayout Orientation="Vertical">
+                                <preLoad:PreloadingBoxView HeightRequest="20" WidthRequest="100" BackgroundColor="#95a5a6"/>
+                                <preLoad:PreloadingBoxView HeightRequest="20" WidthRequest="100" BackgroundColor="#95a5a6"/>
+                            </StackLayout>
+
+                        </FlexLayout>
+
+                        <preLoad:PreloadingBoxView HeightRequest="1" BackgroundColor="#95a5a6"/>
+
+                        <FlexLayout JustifyContent="Start" Margin="0,10">
+                            <preLoad:PreloadingBoxView HeightRequest="50" WidthRequest="50" BackgroundColor="#95a5a6"/>
+                        </FlexLayout>
+
+                        <!--<Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <StackLayout Grid.Row="0" Grid.Column="0" Padding="5,0">
+                                <preLoad:PreloadingBoxView HeightRequest="50" WidthRequest="50" BackgroundColor="#95a5a6"/>
+                            </StackLayout>
+                            <StackLayout Grid.Row="0" Grid.Column="1" Padding="5,0">
+                                <preLoad:PreloadingBoxView HeightRequest="50" WidthRequest="50" BackgroundColor="#95a5a6"/>
+                            </StackLayout>
+                        </Grid>-->
+
+                        <preLoad:PreloadingBoxView HeightRequest="50" WidthRequest="50" BackgroundColor="#95a5a6"/>
+
+                    </StackLayout>
+
+                </pageState:StateCondition>
+
+                <pageState:StateCondition State="Normal">
+
+                    <RefreshView Command="{Binding RefreshDataCommand}"
+                                 RefreshColor="#27ae60"
+                                 IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+
+                        <ScrollView>
+
+                            <StackLayout>
+
+                                <FlexLayout JustifyContent="SpaceBetween">
+
+                                    <Image  Aspect="AspectFit" 
+                                Source="{Binding PaymentDetail.ImageSource}"/>
+
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding PaymentDetail.Date, StringFormat='{0:dd.MM.yyyy}'}"
+                               VerticalTextAlignment="Center"
+                               TextColor="#000" 
+                               FontSize="20" />
+                                        <Label Text="{Binding PaymentDetail.Date, StringFormat='{0:HH:mm}'}"
+                               VerticalTextAlignment="Center" HorizontalTextAlignment="End"
+                               TextColor="#000" 
+                               FontSize="20" />
+                                    </StackLayout>
+
+                                </FlexLayout>
+
+                                <BoxView HeightRequest="1" BackgroundColor="#27ae60"/>
+
+                                <FlexLayout JustifyContent="Start" Margin="0,10">
+                                    <Label Text="{Binding PaymentDetail.Cost, StringFormat='{0} р'}" HorizontalOptions="Center"
+                                               LineBreakMode="NoWrap" 
+                                               TextColor="#000" 
+                                               FontSize="35" />
+                                </FlexLayout>
+
+                                <!--<Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackLayout Grid.Row="0" Grid.Column="0" Padding="5,0">
+                                        <Label Text="Category" FontAttributes="Bold" FontSize="18"/>
+                                        <Label Text="{Binding PaymentDetail.CategoryName}" HorizontalOptions="Center"
+                                               LineBreakMode="NoWrap" 
+                                               TextColor="#000" 
+                                               FontSize="20" />
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="0" Grid.Column="1" Padding="5,0">
+                                        <Label Text="SubCategory" FontAttributes="Bold" FontSize="18"/>
+                                        <Label Text="{Binding PaymentDetail.SubCategoryName}" HorizontalOptions="Center"
+                                               LineBreakMode="NoWrap" 
+                                               TextColor="#000" 
+                                               FontSize="20" />
+                                    </StackLayout>
+                                </Grid>-->
+
+                                <Label Text="{Binding PaymentDetail.Description}" 
+                                       HorizontalOptions="Start" 
+                                       TextColor="#000" 
+                                       FontSize="20" />
+
+                            </StackLayout>
+
+                        </ScrollView>
+
+                    </RefreshView>
+
+                </pageState:StateCondition>
+
+            </pageState:StateContainer>
+
+        </Frame>
+
+    </pages:PopupPage.Content>
+
+</pages:PopupPage>

@@ -1,0 +1,22 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MasterMobile.Pages.AboutPagesView.InnerPages.EthernetInfoPage"
+             Title="{Binding Title}"
+             Shell.NavBarIsVisible="True">
+    
+    <Shell.TitleView>
+        <StackLayout>
+            <Label  FontSize="Large" VerticalOptions="Center" TextColor="#fff" HorizontalOptions="Center"
+               Text="{Binding Title}"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+
+        <StackLayout Padding="5,5,5,5">
+            <Label FontSize="Medium" Margin="0, 15" Text="{Binding NetworkState}" />
+            <Button Text="Check" Command="{Binding CheckNetworkAccess}"></Button>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

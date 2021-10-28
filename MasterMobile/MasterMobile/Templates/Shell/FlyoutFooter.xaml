@@ -1,0 +1,18 @@
+﻿<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             x:Class="MasterMobile.Templates.Shell.FlyoutFooter">
+
+    <ContentView.Content>
+        <StackLayout>
+            <Label Text="Kirill"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+            <Label Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{0:dd, MMMM, yyyy}'}"
+                   TextColor="Black"
+                   HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentView.Content>
+
+</ContentView>

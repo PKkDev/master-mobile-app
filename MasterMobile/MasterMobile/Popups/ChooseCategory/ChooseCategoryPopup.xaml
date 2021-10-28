@@ -1,0 +1,132 @@
+﻿<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    x:Class="MasterMobile.Popups.ChooseCategory.ChooseCategoryPopup"
+    HasSystemPadding="True"
+    SystemPaddingSides="All"
+    IsAnimationEnabled="True"
+    
+    HasKeyboardOffset="False"
+    
+    BackgroundInputTransparent="False">
+
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            DurationIn="400"
+            DurationOut="300"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+
+    <Frame Padding="15,0" Margin="25,25,25,25" BackgroundColor="#fff" CornerRadius="6">
+
+        <StackLayout Spacing="8" >
+
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="BoxView" x:Key="SeparatorBoxView">
+                        <Setter Property="HeightRequest" Value="1"/>
+                        <Setter Property="Color" Value="Gray"/>
+                        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                        <Setter Property="Opacity" Value="0.1"/>
+                    </Style>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+
+            <StackLayout Orientation="Horizontal" 
+                         HorizontalOptions="FillAndExpand">
+                <Button Text="Cancel"
+                    TextColor="Indigo"
+                    BackgroundColor="Transparent"
+                    Command="{Binding CancelCommand}"/>
+                <Label Text="Categories"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   HeightRequest="60"
+                   HorizontalOptions="CenterAndExpand" />
+                <Button Text="Done" 
+                    BackgroundColor="Transparent"
+                    TextColor="Indigo"
+                    Command="{Binding ConfirmCommand}"
+                    HorizontalOptions="End" />
+            </StackLayout>
+
+            <BoxView Style="{StaticResource SeparatorBoxView}"/>
+
+            <Frame Margin="0"
+                   Padding="1"
+                   IsClippedToBounds="True"
+                   CornerRadius="8"
+                   HasShadow="False"
+                   BorderColor="Silver">
+
+                <SearchBar Placeholder="Search for country"
+                       Margin="{OnPlatform iOS='-6, -10', Android='2'}"
+                       x:Name="searchBar"
+                       PlaceholderColor="Silver"
+                       CancelButtonColor="Indigo"
+                       Text="{Binding SearchText}"
+                       SearchCommand="{Binding SearchCategoryCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                       BackgroundColor="White"/>
+            </Frame>
+
+            <Label Text="Selected"
+               FontSize="14"
+               Margin="0,0,0,10"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Image Source="{Binding SelectedCategory.ImageSource}"
+                   HeightRequest="26" 
+                   WidthRequest="26" />
+                <Label Text="{Binding SelectedCategory.Name}"
+                   Margin="12,0" FontSize="18"
+                   VerticalOptions="Center"
+                   HorizontalOptions="FillAndExpand"/>
+                <Label Text="{Binding SelectedCategory.Id}"
+                   FontSize="18" VerticalOptions="Center"
+                   HorizontalTextAlignment="End"/>
+            </StackLayout>
+
+            <BoxView Style="{StaticResource SeparatorBoxView}"/>
+            <Label Text="Categories"
+               FontSize="14"/>
+            <ListView CachingStrategy="RetainElement"
+                  ItemsSource="{Binding VisibleCategories}"
+                  HasUnevenRows="True"
+                  SelectionMode="Single"
+                  SeparatorVisibility="None"
+                  SelectedItem="{Binding SelectedCategoryInList, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal" Padding="5">
+                                    <Image Source="{Binding ImageSource}"
+                                       HeightRequest="26" 
+                                       WidthRequest="26" />
+                                    <Label Text="{Binding Name}" 
+                                       Margin="12,0" FontSize="18" 
+                                       VerticalOptions="Center" 
+                                       HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="{Binding Id}" 
+                                       FontSize="18" 
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="End"/>
+                                </StackLayout>
+                                <BoxView Style="{StaticResource SeparatorBoxView}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+    </Frame>
+
+</pages:PopupPage>

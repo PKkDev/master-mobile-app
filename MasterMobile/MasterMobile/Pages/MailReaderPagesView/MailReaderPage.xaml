@@ -1,0 +1,52 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MasterMobile.Pages.MailReaderPagesView.MailReaderPage">
+
+    <ContentPage.Content>
+
+        <StackLayout>
+
+            <Button Text="Start" Command="{Binding StartCheckCommand}" />
+
+            <Label Text="{Binding Mail}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="{Binding Password}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <ListView ItemsSource="{Binding Logs}" 
+                      SelectionMode="None">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="#fff"
+                                         HeightRequest="25"
+                                         Orientation="Vertical">
+                                <Label Text="{Binding Message}"
+                                       TextColor="#000"
+                                       FontSize="18"
+                                       Margin="15">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="Success">
+                                            <Setter Property="TextColor" Value="#2ecc71"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="Error">
+                                            <Setter Property="TextColor" Value="#e74c3c"></Setter>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+
+</ContentPage>

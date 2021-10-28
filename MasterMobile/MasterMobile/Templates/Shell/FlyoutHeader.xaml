@@ -1,0 +1,16 @@
+﻿<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MasterMobile.Templates.Shell.FlyoutHeader"
+             HeightRequest="50">
+
+    <ContentView.Content>
+        <Grid BackgroundColor="#34495e">
+            <Label Text="Menu" 
+                   TextColor="#fff" 
+                   FontAttributes="Bold" 
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+    </ContentView.Content>
+
+</ContentView>

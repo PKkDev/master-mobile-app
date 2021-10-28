@@ -1,0 +1,9 @@
+﻿<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MasterMobile.Pages.AboutPagesView.AboutPage"
+            Title="About"
+            BarBackgroundColor="#34495e"
+            SelectedTabColor="#27ae60"
+            UnselectedTabColor="#95a5a6"
+            Shell.NavBarIsVisible="True">
+</TabbedPage>

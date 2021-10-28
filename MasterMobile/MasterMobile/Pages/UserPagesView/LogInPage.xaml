@@ -1,0 +1,56 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MasterMobile.Pages.UserPagesView.LogInPage"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+
+        <StackLayout Spacing="8"
+                     Padding="20, 20"
+                     Orientation="Vertical"
+                     VerticalOptions="Start">
+
+            <StackLayout Orientation="Vertical">
+
+                <Button Text="Sign with Instagramm" CornerRadius="6"
+                        TextTransform="Lowercase"
+                        Command="{Binding LogInCommand}"
+                        VerticalOptions="Center"/>
+
+                <Button Text="Sign with Instagramm" CornerRadius="6"
+                        TextTransform="Lowercase"
+                        Command="{Binding LogInCommand}"
+                        VerticalOptions="Center"/>
+
+            </StackLayout>
+
+            <FlexLayout Direction="Row" AlignItems="Center" JustifyContent="Center">
+                <BoxView WidthRequest="100" HeightRequest="2" BackgroundColor="#7f8c8d"/>
+                <Label Margin="10, 0" Text="or" FontSize="20"/>
+                <BoxView WidthRequest="100" HeightRequest="2" BackgroundColor="#7f8c8d"/>
+            </FlexLayout>
+
+            <StackLayout Orientation="Vertical">
+
+                <Entry Text="{Binding Username}" Placeholder="Логин" FontSize="25"
+                   VerticalOptions="Center"/>
+
+                <Entry Text="{Binding Password}" Placeholder = "Пароль" FontSize="25"
+                   IsPassword ="True"
+                   VerticalOptions="Center"/>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+
+                <Button Text="Войти" CornerRadius="6"
+                    Command="{Binding LogInCommand}"
+                    VerticalOptions="Center"/>
+
+                <ImageButton HeightRequest="50" Source="touch_id"  Command="{Binding FingerLogInCommand}" />
+
+            </StackLayout>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

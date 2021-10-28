@@ -1,0 +1,99 @@
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:shellTempl="clr-namespace:MasterMobile.Templates.Shell"
+       xmlns:about="clr-namespace:MasterMobile.Pages.AboutPagesView"
+       xmlns:payment="clr-namespace:MasterMobile.Pages.PaymentPagesView.LastPaymentPage"
+       xmlns:sms="clr-namespace:MasterMobile.Pages.SmsReaderPagesVIew"
+       xmlns:mail="clr-namespace:MasterMobile.Pages.MailReaderPagesView"
+       xmlns:login="clr-namespace:MasterMobile.Pages.UserPagesView"
+       x:Class="MasterMobile.AppShell"
+       Shell.TabBarIsVisible="False"
+       FlyoutWidth="200">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="0.2*,0.8*">
+                <Image Source="{Binding Icon}"
+                       Margin="5"
+                       HeightRequest="45" />
+                <Label Grid.Column="1"
+                       Text="{Binding Text}"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="0.2*,0.8*">
+                <Image Source="{Binding FlyoutIcon}"
+                       Margin="5"
+                       HeightRequest="45" />
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.FlyoutHeader>
+        <shellTempl:FlyoutHeader />
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <shellTempl:FlyoutFooter />
+    </Shell.FlyoutFooter>
+
+    <TabBar>
+        <ShellContent x:Name="logIn" Route="LoginPage" ContentTemplate="{DataTemplate login:LogInPage}" />
+    </TabBar>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+
+        <ShellContent Title="Payment"
+                      Icon="payment.png"
+                      Route="PaymentPage" 
+                      ContentTemplate="{DataTemplate payment:LastPaymentPage}" />
+
+        <ShellContent Title="Sms"
+                      Icon="sms.png"
+                      Route="SmsReaderPage" 
+                      ContentTemplate="{DataTemplate sms:SmsReaderPage}" />
+
+        <ShellContent Title="About"
+                      Icon="about.png"
+                      Route="AboutPage"
+                      ContentTemplate="{DataTemplate about:AboutPage}" />
+
+        <ShellContent Title="Mail"
+                      Icon="mail.png"
+                      Route="MailReaderPage"
+                      ContentTemplate="{DataTemplate mail:MailReaderPage}" />
+    </FlyoutItem>
+
+    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="Logout_MenuItem_Clicked">
+    </MenuItem>
+
+
+
+</Shell>
