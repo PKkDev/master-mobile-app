@@ -41,8 +41,8 @@ namespace MasterMobile.Pages.MailReaderPagesView
             Title = "Check Mail";
 
             Logs = new ObservableCollection<AnalyzeMessage>();
-            Mail = "prodevkir@mail.ru";
-            Password = "ZlZlZlJeME2";
+            Mail = "";
+            Password = "";
             StartCheckCommand = new RelyCommand(async (p) => await OnStartCheckCommand());
 
             MessagingCenter.Subscribe<AnalyzeMessage>(this, "ResMailCheck", (sender) =>

@@ -101,20 +101,6 @@ namespace MasterMobile.Infrastructure.Services
 
                     if (payments.Any())
                     {
-                        MessagingCenter.Send(new AnalyzeMessage("Sending result to db...", AnalyzeResType.Success), "ResMailCheck");
-                        var connectionStr = "Host=37.140.192.97;Port=3306;Database=u0901873_tz_ang;Username=u0901_admin;Password=ZlZlZlJeME2;SSL Mode=none;";
-
-                        //var conn1 = new MySqlConnection(connectionStr);
-                        //conn1.Open();
-
-                        using (var conn = new MySqlConnection(connectionStr))
-                        {
-                            conn.Open();//SSL Mode=none;
-
-                            var queryInsert = @"INSERT INTO payment(coast, day, time, category_key) VALUES(@Coast, @Day, @Time, 2)";
-                            var result = await conn.ExecuteAsync(queryInsert, payments);
-                            MessagingCenter.Send(new AnalyzeMessage($"In DB inserted {result} row", AnalyzeResType.Success), "ResMailCheck");
-                        }
                     }
                 }
             }
